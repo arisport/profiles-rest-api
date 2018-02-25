@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 
 
 # Create your models here.
@@ -34,7 +35,7 @@ class UserProfileManager(BaseUserManager):
         return user
 
 
-class UserProfile(AbstractBaseUser):
+class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Represents a "user profile" inside our system"""
 
     email = models.EmailField(max_length=255, unique=True)
@@ -59,3 +60,8 @@ class UserProfile(AbstractBaseUser):
 
     def __str__(self):
         """Django uses this when need yo convert object to String"""
+
+        return self.email
+
+    def is_gay(self):
+        return True
