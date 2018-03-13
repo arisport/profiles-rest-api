@@ -35,13 +35,14 @@ class UserProfileManager(BaseUserManager):
         return user
 
 
-class UserProfile(AbstractBaseUser, PermissionsMixin):
+class UserProfile(AbstractBaseUser,PermissionsMixin):
     """Represents a "user profile" inside our system"""
 
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    
 
     object = UserProfileManager()
 
@@ -52,6 +53,16 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         """Used yo get Useris full name"""
 
         return self.name
+
+    # def has_perm(self, perm, obj=None):
+    #     "Does the user have a specific permission?"
+    #     # Simplest possible answer: Yes, always
+    #     return True
+    #
+    # def has_module_perms(self, app_label):
+    #     "Does the user have permissions to view the app `app_label`?"
+    #     # Simplest possible answer: Yes, always
+    #     return True
 
     def get_short_name(self):
         """Used yo get Useris short name"""
@@ -65,3 +76,6 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     def is_gay(self):
         return True
+
+    def is_malin(self):
+        return self.USERNAME_FIELD
