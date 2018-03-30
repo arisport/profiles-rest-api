@@ -2,15 +2,20 @@ from django.conf.urls import url
 from django.conf.urls import include
 
 from rest_framework.routers import DefaultRouter
+from rest_framework_swagger.views import get_swagger_view
 
 from . import views
 
 router = DefaultRouter()
-router.register('hello-viewset', views.HelloViewSet, base_name='hello-viewset')
+# router.register('hello-viewset', views.HelloViewSet, base_name='hello-viewset')
 router.register('profile', views.UserProfileViewSet)
 router.register('login', views.LoginViewSet, base_name='login')
 
+schema_view = get_swagger_view(title='Profile API')
+
 urlpatterns = [
-    url(r'^hello-view/', views.HelloApiView.as_view()),
-    url(r'', include(router.urls))
+    url('^$', schema_view),
+    # url(r'^hello-view/', views.HelloApiView.as_view()),
+    url(r'', include(router.urls)),
+
 ]

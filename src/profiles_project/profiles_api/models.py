@@ -54,16 +54,6 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
 
         return self.name
 
-    # def has_perm(self, perm, obj=None):
-    #     "Does the user have a specific permission?"
-    #     # Simplest possible answer: Yes, always
-    #     return True
-    #
-    # def has_module_perms(self, app_label):
-    #     "Does the user have permissions to view the app `app_label`?"
-    #     # Simplest possible answer: Yes, always
-    #     return True
-
     def get_short_name(self):
         """Used yo get Useris short name"""
 
@@ -79,3 +69,16 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
 
     def is_malin(self):
         return self.USERNAME_FIELD
+
+
+class ProfileFeedItem(models.Model):
+    """Profile status update."""
+
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    status_text = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """Return the model as a string."""
+
+        return self.status_text
