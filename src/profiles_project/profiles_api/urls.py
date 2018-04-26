@@ -10,6 +10,7 @@ router = DefaultRouter()
 # router.register('hello-viewset', views.HelloViewSet, base_name='hello-viewset')
 router.register('profile', views.UserProfileViewSet)
 router.register('login', views.LoginViewSet, base_name='login')
+router.register('feed', views.UserProfileFeedViewSet)
 
 schema_view = get_swagger_view(title='Profile API')
 
